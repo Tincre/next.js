@@ -116,6 +116,16 @@ export default function Page() {
 ```
 
 </PagesOnly>
+#### Using a custom server URL
+
+If you have a server-side tag manager deployment, you can customize the URL by passing in a `url` parameter. The component uses `https://www.googletagamanager.com` by default.
+
+```jsx
+import { GoogleTagManager } from '@next/third-parties/google'
+
+  <GoogleTagManager gtmId="GTM-XYZ" url="https://tag-manager-server.xyz" />
+}
+```
 
 #### Sending Events
 
