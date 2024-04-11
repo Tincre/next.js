@@ -8,7 +8,7 @@ import type { GTMParams } from '../types/google'
 let currDataLayerName: string | undefined = undefined
 
 export function GoogleTagManager(props: GTMParams) {
-  const { gtmId, dataLayerName = 'dataLayer', auth, preview, dataLayer } = props
+  const { gtmId, dataLayerName = 'dataLayer', auth, preview, dataLayer, url } = props
 
   if (currDataLayerName === undefined) {
     currDataLayerName = dataLayerName
@@ -17,7 +17,7 @@ export function GoogleTagManager(props: GTMParams) {
   const gtmLayer = dataLayerName !== 'dataLayer' ? `&l=${dataLayerName}` : ''
   const gtmAuth = auth ? `&gtm_auth=${auth}` : ''
   const gtmPreview = preview ? `&gtm_preview=${preview}&gtm_cookies_win=x` : ''
-
+  const gtmUrl = url ? url : 'https://www.googletagmanager.com'
   useEffect(() => {
     // performance.mark is being used as a feature use signal. While it is traditionally used for performance
     // benchmarking it is low overhead and thus considered safe to use in production and it is a widely available
@@ -47,7 +47,7 @@ export function GoogleTagManager(props: GTMParams) {
       <Script
         id="_next-gtm"
         data-ntpc="GTM"
-        src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
+        src={`${gtmUrl}/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
       />
     </>
   )
